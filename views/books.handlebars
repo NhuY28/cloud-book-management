@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="page-header">
+    <div>
+      <h1>📚 Cloud Book Management</h1>
+      <p>Quản lý sách với MongoDB Atlas</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>➕ Thêm sách</h2>
+
+    <form action="/books" method="POST" class="book-form">
+      <div class="form-group">
+        <label for="code">Mã sách</label>
+        <input
+          type="text"
+          id="code"
+          name="code"
+          placeholder="Ví dụ: 326001"
+          required
+        />
+        <small>Mã sách phải bắt đầu bằng 326</small>
+      </div>
+
+      <div class="form-group">
+        <label for="title">Tên sách</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Nhập tên sách"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="author">Tác giả</label>
+        <input
+          type="text"
+          id="author"
+          name="author"
+          placeholder="Nhập tên tác giả"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="price">Giá gốc</label>
+        <input
+          type="number"
+          id="price"
+          name="price"
+          placeholder="Nhập giá sách"
+          min="0"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn-primary">
+        Thêm sách
+      </button>
+    </form>
+  </div>
+
+  <div class="card">
+    <div class="section-header">
+      <h2>📖 Danh sách sách</h2>
+      <span class="badge">VAT {{vat}}%</span>
+    </div>
+
+    {{#if books.length}}
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th>Mã sách</th>
+              <th>Tên sách</th>
+              <th>Tác giả</th>
+              <th>Giá gốc</th>
+              <th>VAT</th>
+              <th>Giá sau VAT</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            {{#each books}}
+              <tr>
+                <td>
+                  <strong>{{code}}</strong>
+                </td>
+                <td>{{title}}</td>
+                <td>{{author}}</td>
+                <td>{{price}} ₫</td>
+                <td>{{vat}}%</td>
+                <td>
+                  <strong>{{finalPrice}} ₫</strong>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{else}}
+      <div class="empty-state">
+        <div class="empty-icon">📚</div>
+        <h3>Chưa có sách</h3>
+        <p>Hãy thêm cuốn sách đầu tiên.</p>
+      </div>
+    {{/if}}
+  </div>
+
+  <footer>
+    <p><strong>Mai Thị Như Ý</strong></p>
+    <p>MSSV: 23IT326</p>
+    <p>VAT áp dụng: {{vat}}%</p>
+  </footer>
+</div>
